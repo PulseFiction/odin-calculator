@@ -5,48 +5,36 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-    <script src="script.js" defer></script>
-    <title>Calculator</title>
+    <link rel="stylesheet" href="./style.css">
+    <script src="./script.js" defer></script>
+    <title>My Calculator</title>
 </head>
 
 <body>
-    <h1>Calculator</h1>
     <div class="container">
-        
-        <div class="first-row">
-            <button class="zero">0</button>
-            <button class="decimal">.</button>
-            <button class="equals">=</button>
-            <button class="plus">+</button>
+        <div class="calculator">
+            <div class="calculator__display">0</div>
+            <div class="calculator__keys">
+                <button data-type='number' class='number zero'>0</button>
+                <button data-type='number' class='number one'>1</button>
+                <button data-type='number' class='number two'>2</button>
+                <button data-type='number' class='number three'>3</button>
+                <button data-type='number' class='number four'>4</button>
+                <button data-type='number' class='number five'>5</button>
+                <button data-type='number' class='number six'>6</button>
+                <button data-type='number' class='number seven'>7</button>
+                <button data-type='number' class='number eight'>8</button>
+                <button data-type='number' class='number nine'>9</button>
+                <button data-action='plus' data-type='operator' class='plus'>+</button>
+                <button data-action='minus'data-type='operator' class='minus'>-</button>
+                <button data-action='times' data-type='operator' class='times'>&times;</button>
+                <button data-action='divide'data-type='operator' class='divide'>&divide;</button>
+                <button data-type='decimal' class='decimal'>.</button>
+                <button data-type='equals' class='equals'>=</button>
+                <button data-type='clear'class='clear'>CA</button>
+            </div>
         </div>
-        <div class="second-row">
-            <button class="one">1</button>
-            <button class="two">2</button>
-            <button class="three">3</button>
-            <button class="-">-</button>
-        </div>
-        <div class="third-row">
-            <button class="four">4</button>
-            <button class="five">5</button>
-            <button class="six">6</button>
-            <button class="multiply">x</button>
-        </div>
-        <div class="fourth-row">
-            <button class="seven">7</button>
-            <button class="eight">8</button>
-            <button class="nine">9</button>
-            <button class="divide">&divide;</button>
-        </div>
-        <div class="fifth-row">
-            <button class="left-bracket">(</button>
-            <button class="right-bracket">)</button>
-            <button class="percentage">%</button>
-            <button class="cancel">AC</button>
-        </div>
-        <div class="display"></div>
     </div>
-    <footer>Copyright &copy; 2021 - The Odin Project - PulseFiction</footer>
 </body>
 
 </html>
