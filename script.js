@@ -1,101 +1,120 @@
-const display = document.querySelector('.calculator__display');
-const keys = document.querySelector('.calculator__keys');
-const calculator = document.querySelector('.calculator');
+const keys = document.querySelectorAll('.calculator');
+const display = document.querySelector('.display');
+const equal = document.querySelector('.equals');
 
-keys.addEventListener('click', (e) => {
-    if (!e.target.closest('button')) return;
-
-    const key = e.target;
-    const type = key.dataset.type;
-    const action = key.dataset.action;
-    const keyContent = key.textContent;
-    const displayedNum = display.textContent;
-    const previousKeyType = calculator.dataset.previousKeyType
-    
-
-     if (type === 'number') {
-        if (displayedNum === '0') {
-            display.textContent = keyContent;
-        } else {
-            display.textContent = displayedNum + keyContent;
-        }
-    } 
-    
-    if (type === 'decimal') {
-        display.textContent = displayedNum + '.';
-    }
-    
-
-    if (type === 'operator') {
-        const operators = document.querySelectorAll('[data-type="operator"]')
-        operators.forEach(el => {el.classList.remove('isDepressed')})
-        key.classList.add('isDepressed')
-        display.textContent = '';
-        calculator.dataset.previousKeyType = action;
-        calculator.dataset.firstNumber = displayedNum;
-        // console.log(calculator.dataset.firstNumber)
-       
-    } else {
-        const buttons = document.querySelectorAll('[data-type]');
-        buttons.forEach(el => el.classList.remove('isDepressed'))
-        
-        
-    }
-
-    
-
-    if (type != 'operator') {
-        if (displayedNum === '0' || previousKeyType === 'operator') {
-            display.textContent = keyContent;
-        } else {
-            display.textContent = displayedNum + keyContent;
-        }
-    }
-
-    if (type === 'equals') {
-        const firstNumber = calculator.dataset.firstNumber;
-        const secondNumber = displayedNum;
-        const operator = calculator.dataset.previousKeyType;
-        // console.log(secondNumber)
-        display.textContent = calculate(firstNumber, secondNumber, operator)
-    }
-    
-
-    if (type === 'clear') {
-        display.textContent = ''
-    }
-
-    
-    
-
-    
+keys.forEach(key => {
+    key.addEventListener('click', displayNumbers)
 })
 
 
+function displayNumbers(e) {
 
+    const key = e.target
+    const keyValue = key.textContent;
+    const displayValue = display.textContent;
+    const dataType = key.dataset.type
+    const dataAction = key.dataset.action
 
-
-
-
-
-
-function calculate(firstNumber, secondNumber, operator) {
-
-    firstNumber = parseFloat(firstNumber);
-    secondNumber = parseFloat(secondNumber);
-    let result = '';
-    if (operator === 'plus') {
-        result = firstNumber + secondNumber;
-    } else if (operator === 'minus') {
-        result = firstNumber - secondNumber;
-    } else if (operator === 'times') {
-        result = firstNumber * secondNumber;
-    } else if (operator === 'divide') {
-        result = firstNumber / secondNumber;
-    } else {
-        result = '0';
+   if (display.textContent === '0') {
+        display.textContent = keyValue;
+    } else if (display.textContent.length < 9) {
+        display.textContent = displayValue + keyValue;
     }
-    return result;
+
+    
+    if (dataType === 'equals') {
+        
+        display.textContent = operate(displayValue)
+        
+    }
+
+    if (dataType === 'cancel') {
+        display.textContent = '0'
+    }
+    
+
+}
+
+
+
+
+function operate(value) {
+    const formula = value.split(/\D/);
+    let operator = value.split(/\d/);
+
+    operator = operator.filter((item) => {
+        return item.length > 0
+    })
+    console.log(formula)
+
+
+    operator = operator[0]
+
+
+    first = parseInt(formula[0]);
+    second = parseInt(formula[1]);
+    console.log(first)
+    console.log(second)
+    console.log(operator)
+
+    switch(operator) {
+        case '+':
+            return first + second;
+            break;
+        case '-':
+            return first - second;
+            break;
+        case '×':
+            return first * second;
+            break;
+        case '÷':
+            return first / second;
+            break;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    /*
+    
+    let operator;
+    let first;
+
+    if (dataType === 'operator') {
+        operator = dataAction;
+        first = displayValue;
+        console.log(first)
+        console.log(operator)
+        
+        display.textContent = ''
+    } 
     
     
-};
+    
+    if (dataType === 'equals') {
+        second = displayValue;
+        console.log(second)
+        display.textContent = operate(first, operator, second);
+    }*/
+
+
+
+
