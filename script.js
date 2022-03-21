@@ -13,7 +13,7 @@ function displayNumbers(e) {
     const keyValue = key.textContent;
     const displayValue = display.textContent;
     const dataType = key.dataset.type
-    const dataAction = key.dataset.action
+    
 
    if (display.textContent === '0') {
         display.textContent = keyValue;
@@ -22,11 +22,17 @@ function displayNumbers(e) {
     }
 
     
+    
     if (dataType === 'equals') {
-        
         display.textContent = operate(displayValue)
-        
+    } else if (dataType === 'operator') {
+        if (displayValue.includes('+') || displayValue.includes('-') || displayValue.includes('÷') || displayValue.includes('×')) {
+            display.textContent = operate(displayValue)
+            
+        }
     }
+
+
 
     if (dataType === 'cancel') {
         display.textContent = '0'
